@@ -5,24 +5,6 @@
 	</head>
 	<body>
 		<h1>Goofy Goobers</h1><br>
-		<hl>
-		<script>
-			var toggle = false;
-			var visible = true;
-			function buttonPressed()
-			{
-				if(toggle == false && visible)
-				{
-					document.body.style.backgroundColor="greenyellow";
-					toggle = true;
-				}
-				else
-				{
-					document.body.style.backgroundColor="lightblue";
-					toggle=false;
-				}
-			}
-		</script>
 
 <?php
 //==================CONNECTION TO DATABASE================================================================
@@ -218,7 +200,6 @@
 				
 				<input type="hidden" name="page" value="1">
 				<p><input type="submit" value="LOGOUT"></p>
-				<input type="button" onclick="buttonPressed()" value="Toggle Color">
 			</form>
         <?php
 
@@ -234,7 +215,6 @@
 				
 				<input type="hidden" name="page" value="1">
 				<p><input type="submit" value="LOGOUT"></p>
-				<input type="button" onclick="buttonPressed()" value="Toggle Color">
 			</form>
 <?php
 	}
