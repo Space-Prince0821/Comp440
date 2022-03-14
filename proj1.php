@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>proj1</title>
+		<title>lab 2</title>
 	</head>
 	<body>
-		<h1>Goofy Goobers</h1><br>
+		<h1>Goofy Goober login</h1><br>
 
 <?php
 //==================CONNECTION TO DATABASE================================================================
 	$user = 'root';
 	$password = 'root';
-	$db = 'lab2';
+	$db = 'users';
 	$host = 'localhost';
 	$port = 3306;
 
@@ -47,13 +47,12 @@
 		die();
 	}
 
-	echo ("<br><strong>This is page# $pageNum</strong>");
+	echo ("<br><strong>This is page #$pageNum</strong>");
 	if($pageNum == 1)
 	{
 ?>
 			<!--Uses php contained script as well as superglobal $_SERVER to allow user to retrieve variables from the html, can be retrieved using $_GET, $_POST, and $_REQUEST -->
-			<br><br><h2>Login here</h2>
-            <form method="get" 
+			<form method="get" 
 				action="<?php echo $_SERVER['PHP_SELF']; ?>">
 				
 				<input type="hidden" name="page" value="2">
@@ -67,7 +66,7 @@
 			</form>
 
 			<!--Uses php contained script as well as superglobal $_SERVER to allow user to retrieve variables from the html, can be retrieved using $_GET, $_POST, and $_REQUEST -->
-			<br><br><h2>Register here</h2>
+			<br><br><h2>Regester here</h2>
 			<form method="get" 
 				action="<?php echo $_SERVER['PHP_SELF']; ?>">
 				
@@ -77,6 +76,18 @@
 				</label></p>
 				<p><label>Desired Password:
 					<input type="text" name="newPass">
+				</label></p>
+				<p><label>Confirm Password:
+					<input type="text" name="newPass2">
+				</label></p>
+				<p><label>Name:
+					<input type="text" name="firstName">
+				</label></p>
+				<p><label>Last name:
+					<input type="text" name="lastName">
+				</label></p>
+				<p><label>email:
+					<input type="text" name="email">
 				</label></p>
 				<p><input type="submit" value="Register"></p>
 			</form>
@@ -96,11 +107,11 @@
 			$username=$password="";					//Set variables to "" to create a starting point for 										 //storage
 			$username = $_REQUEST["username"];		//Provides script similar to $_GET and $_POST
 			$password = $_REQUEST["password"];		//to retrive from html and store in php var
-			$adminU = "Administrator";				//Manually created string for Administrator aspect
-			$adminP = "1Password";
+			$adminU = "Admin";						//Manually created string for Administrator aspect
+			$adminP = "adpass";
 
 			//Query stored as a php string
-			$query = "SELECT * FROM users WHERE username=? and password=?";
+			$query = "SELECT * FROM user2 WHERE username=? and password=?";
 			$stmt = $linkdb->prepare($query);					//Prepares a statement for execution
 			$stmt->bind_param('ss',$username, $password);		//Binds variables to prepared query ?
 			$stmt->execute();									//executes statement
@@ -118,24 +129,26 @@
 			<table border="1">
 				<thead>
 					<tr>
-						<td>User ID</td>
+						<td>Name</td>
 						<td>Username</td>
 						<td>Password</td>
 					</tr>
 				</thead>
 				<tbody>
 <?php
-					$aTable = "SELECT * FROM users";			//Query stored as a php string
+					$aTable = "SELECT * FROM user2";			//Query stored as a php string
 					$stmt2 = $linkdb->prepare($aTable);			//Prepares a statement for execution
 					$stmt2->execute();							//executes statement
 					$resultTable = $stmt2->get_result();		//Stores result from prepared statement
 					foreach($resultTable as $resultTableRow)
 					{
 						//Stores values of each column at current row into temporary statements to be //printed
-						$userId = $resultTableRow["userId"];
 						$username = $resultTableRow["username"];
 						$password = $resultTableRow["password"];
-						print("<tr><td>$userId</td>" . "<td>$username</td>" . "<td>$password</td></tr>");
+						$firstName = $resultTableRow["firstName"];
+						$lastName = $resultTableRow["lastName"];
+						$email = $resultTableRow["email"];
+						print("<tr><td>$firstName</td>" . "<td>$username</td>" . "<td>$password</td></tr>");
 					}
 ?>
 				</tbody>
@@ -146,7 +159,7 @@
 				}
 				else if($result)
 				{
-					echo("<p>Welcome back $username!</p></body></html>");
+					echo("<p>Welcome back $firstName!</p></body></html>");
 					break;
 				}
 				else
@@ -166,17 +179,20 @@
 			$newUser=$newPass="";					//Set variables to "" to create a starting point
 			$newUser = $_REQUEST["newUser"];		//Provides script similar to $_GET and $_POST
 			$newPass = $_REQUEST["newPass"];		//to retrive from html and store in php var
+			$newPass2 = $_REQUEST["newPass2"];
+			$firstName = $_REQUEST["firstName"];
+			$lastName = $_REQUEST["lastName"];
+			$email = $_REQUEST["email"];
 
-			$query = "SELECT username FROM users";	//Query stored as a php string
+			$query = "SELECT username FROM user2";	//Query stored as a php string
 			$stmt = $linkdb->prepare($query);		//Prepares a statement for execution
 			$stmt->execute();						//executes statement
 			$result = $stmt->get_result();			//Stores result from prepared statement
 
-			//Stores values of each column at current row into temporary statements to be //printed
 			foreach($result as $resultRow)
 			{
 				$tempU = $resultRow["username"];
-				if($newUser == "Administrator")
+				if($newUser == "Admin")
 				{
 					echo("<p>Cannot register as Administrator!</p></body></html>");
 					die();
@@ -185,24 +201,21 @@
 				{
 					echo("<p>Username already taken please try another one</p></body></html>");
 					die();
-				}				
+				}			
 			}
-			$query2 = "INSERT INTO users (username, password) VALUES(?,?)";
+			if(!($newPass == $newPass2))
+			{
+				echo("<p>Passwords do not match!<p></body></html>");
+				die();
+			}	
+			$query2 = "INSERT INTO user2 (username, password, firstName, lastName, email) VALUES(?,?,?,?,?)";
 			$stmt2 = $linkdb->prepare($query2);
-			$stmt2->bind_param('ss',$newUser, $newPass);
+			$stmt2->bind_param('sssss',$newUser, $newPass, $firstName, $lastName, $email);
 			$stmt2->execute();
 			$result2 = $stmt2->get_result();
-			echo("<p>Registration completed! Welcome!</p></body></html>");
+			echo("<p>here!</p></body></html>");
+			echo("<p>Registration completed! Welcome $firstName!</p></body></html>");
 		}
-        ?>
-            <form method="get" 
-				action="<?php echo $_SERVER['PHP_SELF']; ?>">
-				
-				<input type="hidden" name="page" value="1">
-				<p><input type="submit" value="LOGOUT"></p>
-			</form>
-        <?php
-
 		else
 		{
 			echo("<p><strong>Error...need both username and password!</strong></p></body></html>");
