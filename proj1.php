@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>lab 2</title>
+		<title>Project 1 pt 1</title>
 	</head>
 	<body>
 		<h1>Goofy Goober login</h1><br>
 
 <?php
 //==================CONNECTION TO DATABASE================================================================
-	$user = 'root';
-	$password = 'root';
+	$user = 'comp440';
+	$password = 'pass1234';
 	$db = 'users';
 	$host = 'localhost';
 	$port = 3306;
@@ -129,9 +129,11 @@
 			<table border="1">
 				<thead>
 					<tr>
-						<td>Name</td>
 						<td>Username</td>
 						<td>Password</td>
+						<td>Name</td>
+						<td>Last name</td>
+						<td>Email</td>
 					</tr>
 				</thead>
 				<tbody>
@@ -148,7 +150,7 @@
 						$firstName = $resultTableRow["firstName"];
 						$lastName = $resultTableRow["lastName"];
 						$email = $resultTableRow["email"];
-						print("<tr><td>$firstName</td>" . "<td>$username</td>" . "<td>$password</td></tr>");
+						print("<tr><td>$username</td>" . "<td>$password</td>" . "<td>$firstName</td>" . "<td>$lastName</td>" . "<td>$email</td></tr>");
 					}
 ?>
 				</tbody>
@@ -183,7 +185,7 @@
 			$firstName = $_REQUEST["firstName"];
 			$lastName = $_REQUEST["lastName"];
 			$email = $_REQUEST["email"];
-
+//@QUERY CHECK USERNAME EXISTS
 			$query = "SELECT username FROM user2";	//Query stored as a php string
 			$stmt = $linkdb->prepare($query);		//Prepares a statement for execution
 			$stmt->execute();						//executes statement
@@ -201,13 +203,30 @@
 				{
 					echo("<p>Username already taken please try another one</p></body></html>");
 					die();
-				}			
+				}		
 			}
 			if(!($newPass == $newPass2))
 			{
 				echo("<p>Passwords do not match!<p></body></html>");
 				die();
-			}	
+			}
+//@QUERY UNIQUE EMAIL CHECK	
+			$query = "SELECT email FROM user2";	
+			$stmt = $linkdb->prepare($query);		
+			$stmt->execute();						
+			$result = $stmt->get_result();
+
+			foreach($result as $resultRow)
+			{
+				$tempEmail = $resultRow["email"];
+
+				if($tempEmail == $email)
+				{
+					echo("<p>Email already exists in another account!</p></body></html>");
+					die();
+				}	
+			}
+//@QUERY INSERT NEW USER
 			$query2 = "INSERT INTO user2 (username, password, firstName, lastName, email) VALUES(?,?,?,?,?)";
 			$stmt2 = $linkdb->prepare($query2);
 			$stmt2->bind_param('sssss',$newUser, $newPass, $firstName, $lastName, $email);
