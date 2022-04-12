@@ -2,7 +2,7 @@
     //Database credentials
     define('DB_SERVER', 'localhost');
     define('DB_USERNAME', 'comp440');
-    define('DB_PASSWORD', 'King1998*');
+    define('DB_PASSWORD', 'pass1234');
     define('DB_NAME', 'COMP440');
 
     //Connecting to MySQL
@@ -13,6 +13,6 @@
         die("ERROR: Could not connect. " . mysqli_connect_error());
     }
     else {
-        echo "Connection Successful!";
+        echo "<p>Connection Successful!</p>";
     }
 ?>

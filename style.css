@@ -17,3 +17,8 @@ body {
     padding: 7px;  
     margin-left: 70%;  
 }
+
+.init-form {
+    width: 100%;
+    text-align: center;
+}
