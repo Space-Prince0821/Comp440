@@ -39,28 +39,37 @@
                     $initdb = "CREATE DATABASE IF NOT EXISTS COMP440";
 
                     if ($conn -> query($initdb) === TRUE) {
-                        echo "Database create successfully \n";
+                        echo "<p>Database created successfully.</p>";
                     } else {
-                        echo "Error creating database: " . $conn -> error;
+                        echo "<p>Error creating database:" . $conn -> error . ".</p>";
                     }
 
-                    include("Config.php");
+                    //Create comp440 user 
+                    $initUser = "CREATE USER IF NOT EXISTS 'comp440'@'localhost' IDENTIFIED BY 'pass1234'";
+                    $grantUser = "GRANT ALL PRIVILEGES ON *.* TO 'comp440'@'localhost' WITH GRANT OPTION";
+
+                    if ($conn -> query($initUser) === TRUE) {
+                        $conn -> query($grantUser);
+                        echo "<p>User comp440 created.</p>";
+                    } else {
+                        echo "<p>Error creating comp440 user:" . $conn -> error . ".</p>";
+                    }
 
                     $templine = '';
                     $lines = file('Initdb.sql');
 
                     foreach ($lines as $line) {
                         if (substr($line, 0, 2) == '--' || $line == '') {
-                        continue;
+                            continue;
                         }
                         $templine .= $line;
                         if (substr(trim($line), -1, 1) == ';') {
-                        $conn -> query($templine) or print('Error performing query \'<strong>' . $templine . '\': ' . mysqli_error() . '<br /><br />');
-                        $templine = '';
+                            $conn -> query($templine) or print('Error performing query \'<strong>' . $templine . '\': ' . mysqli_error($conn) . '<br /><br />');
+                            $templine = '';
                         }
                     }
 
-                    echo "Table imported";
+                    echo "<p>Tables intialized.</p>";
 
                     $conn -> close();
             
