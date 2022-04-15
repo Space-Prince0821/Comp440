@@ -1,4 +1,5 @@
 <?php
+    session_start();
     include("Config.php");
 
     if (isset($_REQUEST["new_post"])) {
@@ -9,7 +10,7 @@
         $sql = "INSERT INTO blog(subject, description) VALUES('$blog_title', '$blog_desc')";
         mysqli_query($db, $sql);
 
-        header("Location: welcome.php");
+        header("Location: welcome.php?success=newPost");
         exit();
     }
 ?>

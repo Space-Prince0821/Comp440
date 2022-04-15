@@ -1,4 +1,5 @@
 <?php
+    session_start();
     include("BlogLogic.php");
 ?>
 <!DOCTYPE html>
@@ -14,8 +15,10 @@
             <form method="GET">
                 <input type="text" placeholder="Blog Subject" class="form-control bg-dark text-white my-3
                 text-center" name="blog_title">
-                <textarea class="form-control bg-dark text-white my-3" placeholder="Blog Description" name="blog_desc"></textarea>
-                <input type="text" placeholder="Blog tags" class="form-control bg-dark text-white my-3" name="blog_tag"> 
+                <textarea class="form-control bg-dark text-white my-3" placeholder="Blog Description" 
+                name="blog_desc"></textarea>
+                <input type="text" placeholder="Blog tags" class="form-control bg-dark text-white my-3" 
+                name="blog_tag"> 
                 <button class="btn btn-dark" name="new_post">Post Blog</button>
             </form>
         </div>
