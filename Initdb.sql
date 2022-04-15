@@ -3,8 +3,8 @@ use `COMP440`;
 SET FOREIGN_KEY_CHECKS = 0;
 
 -- Create user table
-DROP TABLE IF EXISTS `user`;
-CREATE TABLE user (
+DROP TABLE IF EXISTS `users`;
+CREATE TABLE users (
     `user_id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     `username` varchar(20) COLLATE utf8mb4_general_ci NOT NULL,
     `password` varchar(20) COLLATE utf8mb4_general_ci NOT NULL,
@@ -14,7 +14,7 @@ CREATE TABLE user (
 );
 
 -- Add 5 users
-INSERT INTO `user` (username, password, firstName, lastName, email)  VALUES 
+INSERT INTO `users` (username, password, firstName, lastName, email)  VALUES 
     ('michael', 'password', 'Michael', 'Paul', 'michaelandrewpaul97@gmail.com'),
     ('prince', 'password', 'Prince', 'Chowdury', 'prince@gmail.com'),
     ('brandon', 'password', 'Brandon', 'Tong', 'brandon@gmail.com'),
@@ -25,9 +25,9 @@ INSERT INTO `user` (username, password, firstName, lastName, email)  VALUES
 DROP TABLE IF EXISTS `follow`;
 CREATE TABLE follow (
     `user_id` INT DEFAULT NULL,
-    CONSTRAINT `user_id_fk_3` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE SET NULL,
+    CONSTRAINT `user_id_fk_3` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE SET NULL,
     `follows_user_id` INT DEFAULT NULL,
-    CONSTRAINT `user_id_fk_4` FOREIGN KEY (`follows_user_id`) REFERENCES `user` (`user_id`) ON DELETE SET NULL
+    CONSTRAINT `user_id_fk_4` FOREIGN KEY (`follows_user_id`) REFERENCES `users` (`user_id`) ON DELETE SET NULL
 );
 
 INSERT INTO `follow` VALUES
@@ -63,7 +63,7 @@ CREATE TABLE UserHobbies (
     `hobby_id` INT DEFAULT NULL,
     CONSTRAINT `hobby_id_fk` FOREIGN KEY (`hobby_id`) REFERENCES `hobbies` (`hobby_id`) ON DELETE SET NULL,
     `user_id` INT DEFAULT NULL,
-    CONSTRAINT `user_id_fk` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE SET NULL
+    CONSTRAINT `user_id_fk` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE SET NULL
 );
 
 INSERT INTO `UserHobbies` VALUES
@@ -80,7 +80,7 @@ DROP TABLE IF EXISTS `blog`;
 CREATE TABLE blog (
     `blog_id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     `user_id` INT DEFAULT NULL,
-    CONSTRAINT `user_id_fk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE SET NULL,
+    CONSTRAINT `user_id_fk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE SET NULL,
     `date` varchar(20) COLLATE utf8mb4_general_ci NOT NULL,
     `subject` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
     `description` varchar(1000) COLLATE utf8mb4_general_ci NOT NULL
@@ -134,7 +134,7 @@ CREATE TABLE comment (
     `blog_id` INT DEFAULT NULL,
     CONSTRAINT `blog_id_fk_2` FOREIGN KEY (`blog_id`) REFERENCES `blog` (`blog_id`) ON DELETE SET NULL,
     `user_id` INT DEFAULT NULL,
-    CONSTRAINT `user_id_fk_2` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE SET NULL,
+    CONSTRAINT `user_id_fk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE SET NULL,
     `date` varchar(20) COLLATE utf8mb4_general_ci NOT NULL, 
     `sentiment` BIT COLLATE utf8mb4_general_ci NOT NULL,
     `description` varchar(500) COLLATE utf8mb4_general_ci NOT NULL

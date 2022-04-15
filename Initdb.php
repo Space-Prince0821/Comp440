@@ -29,7 +29,7 @@
 
                 if (isset($_GET['initdb'])) {
 
-                    $conn = new mysqli($dbServer, $dbUsername, $dbPassword);
+                    $conn = new mysqli($dbServer, $dbUsername);
 
                     if ($conn -> connect_error) {
                         die("Connection failed: " . $conn -> connect_error);
