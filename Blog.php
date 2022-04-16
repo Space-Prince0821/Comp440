@@ -12,7 +12,7 @@
     </head>
     <body>
         <div class="container mt-5">
-            <form method="GET">
+            <form method="POST">
                 <input type="text" placeholder="Blog Subject" class="form-control bg-dark text-white my-3
                 text-center" name="blog_title">
                 <textarea class="form-control bg-dark text-white my-3" placeholder="Blog Description" 

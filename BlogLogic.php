@@ -10,9 +10,9 @@
         $blog_desc = $_REQUEST["blog_desc"];
         $blog_tag = $_REQUEST["blog_tag"];
         $user_id = $_SESSION['sessionId'];
-        $current_date = CURDATE();
+        //$current_date = CURDATE();
 
-        $sql = "INSERT INTO blog(user_id, date, subject, description) VALUES('$user_id', '$current_date', '$blog_title', '$blog_desc')";
+        $sql = "INSERT INTO blog(user_id, date, subject, description) VALUES('$user_id', '2022-04-17', '$blog_title', '$blog_desc')";
         mysqli_query($db, $sql);
 
         header("Location: welcome.php?success=newPost");
