@@ -1,8 +1,8 @@
 <?php
     //Database credentials
     define('DB_SERVER', 'localhost');
-    define('DB_USERNAME', 'comp440');
-    define('DB_PASSWORD', 'King1998*');
+    define('DB_USERNAME', 'root');
+    define('DB_PASSWORD', '');
     define('DB_NAME', 'COMP440');
 
     //Connecting to MySQL
@@ -11,8 +11,5 @@
     // Check connection
     if ($db === false) {
         die("ERROR: Could not connect. " . mysqli_connect_error());
-    }
-    else {
-        echo "Connection Successful!";
     }
 ?>

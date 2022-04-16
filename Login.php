@@ -13,7 +13,11 @@
         $count = mysqli_num_rows($result);  
             
         if ($count == 1) {  
-            header("Location: welcome.php");
+            session_start();
+            $_SESSION['sessionId'] = $row['user_id'];
+            $_SESSION['sessionUser'] = $row['username'];
+            header("Location: welcome.php?success=loggedin");
+            exit();
         }  
         else {  
             echo "<h1> Login failed. Invalid username or password.</h1>";  
