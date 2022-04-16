@@ -44,11 +44,11 @@
         }
 
         // Insert into users table, new user info
-        $sql2 = "INSERT INTO users (first_name, username, password, email, last_name) VALUES(?, ?, ?, ?, ?)";
+        $sql2 = "INSERT INTO users (username, password, firstName, lastName, email) VALUES(?, ?, ?, ?, ?)";
 
         if ($stmt = mysqli_prepare($db, $sql2)) {
-            mysqli_stmt_bind_param($stmt, "sssss", $param_first, $param_username, 
-            $param_password, $param_email, $param_last);
+            mysqli_stmt_bind_param($stmt, "sssss", $param_username, 
+            $param_password, $param_first, $param_last, $param_email);
 
             $param_first = $first_name;
             $param_username = $new_username;
