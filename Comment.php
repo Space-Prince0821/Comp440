@@ -53,7 +53,7 @@
                     $currDate = date('Y-m-d');
 
                     // Check comments on current date
-                    $dayCommentsQuery = "SELECT count(*) FROM comment WHERE user_id=$userId AND date='$currDate";
+                    $dayCommentsQuery = "SELECT count(*) FROM comment WHERE user_id=$userId AND date='$currDate'";
                     $result1 = mysqli_query($db, $dayCommentsQuery);
 
                     $dayComments = $result1->fetch_array()[0] ?? '';

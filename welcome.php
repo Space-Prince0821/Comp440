@@ -30,6 +30,10 @@
             color: white;
             opacity: 0.6;
          }
+         .tags {
+            border-bottom: 2px solid white;
+            text-align: center;
+         }
         </style>
    </head>
    <body>
@@ -47,6 +51,26 @@
          <?php foreach($query as $q) {?>
             <div class="col-4 d-flex justify-content-center align-items-center">
                <div class="card text-white bg-dark mt-5">
+                  <!-- Inserting tags for posts-->  
+                  <?php 
+                     $blog_identification = $q['blog_id'];
+
+                     $tag_identification = "SELECT tag_id FROM BlogTags WHERE blog_id=$blog_identification";
+                     $sqlquery = mysqli_query($db, $tag_identification);
+
+                     foreach($sqlquery as $p) {
+                        $s = $p['tag_id'];
+                        $tag_query = "SELECT tag_name FROM tags WHERE tag_id=$s";
+                        $result2 = mysqli_query($db, $tag_query);
+                        $tag_blog_name = $result2->fetch_array()[0] ?? '';
+
+                        echo '<div class="tags">';
+                        echo '<p><strong>' . $tag_blog_name . '</strong></p>';
+                        echo '</div>';
+
+                        //echo $tag_blog_name;
+                     }
+                  ?>
                   <div class="card-body" style="width: 18rem;">
                      <h5 class="card-title"><?php echo $q['subject'];?></h5>
                      <p class="card-text" style="font-size: 12px;">
