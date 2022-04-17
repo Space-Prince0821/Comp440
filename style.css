@@ -1,5 +1,5 @@
 body {   
-    background: #eee;  
+    background: #eee;
 }  
 
 #frm {  
@@ -16,4 +16,9 @@ body {
     background: #337ab7;  
     padding: 7px;  
     margin-left: 70%;  
+}
+
+.init-form {
+    margin: 0 auto;
+    width: 130px;
 }
