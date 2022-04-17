@@ -58,8 +58,6 @@
 
                     $dayComments = $result1->fetch_array()[0] ?? '';
 
-                    echo $dayComments;
-
                     // Check comments on current blog
                     $blogCommentsQuery = "SELECT count(*) FROM comment WHERE user_id=$userId AND blog_id=$blogId";
                     $result2 = mysqli_query($db, $blogCommentsQuery);

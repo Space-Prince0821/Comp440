@@ -35,7 +35,7 @@
    <body>
       <h1>Welcome</h1> 
       <?php
-         session_start();
+         // session_start();
          if (isset($_SESSION['sessionId'])) {
             echo "You are logged in as '$_SESSION[sessionUser]' <br />";
          } else {
