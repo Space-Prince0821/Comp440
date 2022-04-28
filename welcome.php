@@ -46,6 +46,7 @@
             echo "Home";
          }
       ?>
+      <a href = "Queries.php"><button>Search Blog</button></a>
       <div class="row">
 
          <?php foreach($query as $q) {?>
