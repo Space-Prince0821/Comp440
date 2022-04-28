@@ -28,22 +28,24 @@
 			</thead>
 			<tbody>
         <?php 
-            $tempArr = [];
             $query = "SELECT user_id COUNT(*) FROM blog GROUP BY blog_id HAVING COUNT(*) > 1";
             $result = mysqli_query($db, $query);  
-            foreach($result as $resultRow) {	
-                $tempArr[$resultRow] = $result;
-            }
 
-            $sql = "SELECT user_id FROM users";
+            $sql = "SELECT * FROM users
+                    WHERE user_id in 
+                    (SELECT user_id COUNT(*) FROM blog GROUP BY blog_id HAVING COUNT(*) > 1)";
             $resultant = mysqli_query($db, $sql);
-            foreach($resultant as $resultantRow) {	
-                if($resultant == $tempArr[$resultantRow]) {
-                    $firstName = $resultantRow['firstName'];
-                    $lastName = $resultantRow['lastName'];
+
+            foreach($resultant as $resultantRow) {
+                $user_id = $resultantRow['user_id'];
+                $firstName = $resultantRow['firstName'];
+                $lastName = $resultantRow['lastName'];
+ 
+                if($resultantRow['user_id'] == $user_id) {
                     print("<tr><td>$firstName</td>" . "<td>$lastName</td></tr>");
                 }
             }
+
         ?>
         </tbody>
     </table>
