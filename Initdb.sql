@@ -19,7 +19,9 @@ INSERT INTO `users` (username, password, firstName, lastName, email)  VALUES
     ('prince', 'password', 'Prince', 'Chowdury', 'prince@gmail.com'),
     ('brandon', 'password', 'Brandon', 'Tong', 'brandon@gmail.com'),
     ('john', 'password', 'John', 'Appleseed', 'johna@gmail.com'),
-    ('bob', 'pass1234', 'Bob', 'Johnson', 'bob9@gmail.com');
+    ('bob', 'pass1234', 'Bob', 'Johnson', 'bob9@gmail.com'),
+    ('tom', 'password', 'Tom', 'Sawyer', 'tom19@gmail.com'),
+    ('jim', 'password', 'Jim', 'Hall', 'jimhall@hotmail.com');
 
 -- Create follows table
 DROP TABLE IF EXISTS `follow`;
@@ -34,10 +36,13 @@ INSERT INTO `follow` VALUES
     -- user 1 follows user 2
     (1, 2),
     (1, 3),
+    (2, 3),
     (2, 1),
     (3, 1),
     -- user 5 follows user 4
-    (5, 4);
+    (5, 4),
+    (1, 6),
+    (2, 6);
 
 -- Create hobby table
 DROP TABLE IF EXISTS `hobbies`;
@@ -73,7 +78,10 @@ INSERT INTO `UserHobbies` VALUES
     (1, 5),
     (2, 2),
     (3, 3),
-    (5, 7);
+    (5, 7),
+    (5, 3),
+    (3, 6),
+    (7, 7);
 
 -- Create blog table
 DROP TABLE IF EXISTS `blog`;
@@ -89,9 +97,13 @@ CREATE TABLE blog (
 INSERT INTO `blog` (user_id, date, subject, description) VALUES
     (1, CURDATE(), 'Soccer', "Association football, more commonly known as simply football or soccer,[a] is a team sport played with a spherical ball between two teams of 11 players. It is played by approximately 250 million players in over 200 countries and dependencies, making it the world's most popular sport."),
     (1, CURDATE(), 'Bitcoin', "Bitcoin (₿) is a decentralized digital currency, without a central bank or single administrator, that can be sent from user to user on the peer-to-peer bitcoin network without the need for intermediaries.[7] Transactions are verified by network nodes through cryptography and recorded in a public distributed ledger called a blockchain."),
-    (2, CURDATE(), 'Video Games', "A video game[a] or computer game is an electronic game that involves interaction with a user interface or input device – such as a joystick, controller, keyboard, or motion sensing device – to generate visual feedback. This feedback is shown on a video display device, such as a TV set, monitor, touchscreen, or virtual reality headset."),
+    (2, CURDATE(), 'Video Games', "A video game[a] or computer game is an electronic game that involves interaction with a user interface or input device such as a joystick, controller, keyboard, or motion sensing device to generate visual feedback. This feedback is shown on a video display device, such as a TV set, monitor, touchscreen, or virtual reality headset."),
     (3, CURDATE(), 'Hiking', "Hiking is a long, vigorous walk, usually on trails or footpaths in the countryside. Walking for pleasure developed in Europe during the eighteenth century.[1] Religious pilgrimages have existed much longer but they involve walking long distances for a spiritual purpose associated with specific religions."),
-    (5, CURDATE(), 'Rock Music', "Rock music is a broad genre of popular music that originated as 'rock and roll' in the United States in the late 1940s and early 1950s, developing into a range of different styles in the mid-1960s and later, particularly in the United States and the United Kingdom.[2] It has its roots in 1940s and 1950s rock and roll, a style that drew directly from the blues and rhythm and blues genres of African-American music and from country music.");
+    (3, CURDATE(), 'Ethereum', "Ethereum is a decentralized, open-source blockchain with smart contract functionality. Ether (ETH or Ξ) is the native cryptocurrency of the platform. Among cryptocurrencies, Ether is second only to Bitcoin in market capitalization."),
+    (5, CURDATE(), 'Rock Music', "Rock music is a broad genre of popular music that originated as 'rock and roll' in the United States in the late 1940s and early 1950s, developing into a range of different styles in the mid-1960s and later, particularly in the United States and the United Kingdom.[2] It has its roots in 1940s and 1950s rock and roll, a style that drew directly from the blues and rhythm and blues genres of African-American music and from country music."),
+    (3, '2022-05-01', 'Cats', "The cat (Felis catus) is a domestic species of small carnivorous mammal.[1][2] It is the only domesticated species in the family Felidae and is often referred to as the domestic cat to distinguish it from the wild members of the family."),
+    (6, '2022-05-01', 'Artificial Intelligence', 'Artificial intelligence (AI) is intelligence demonstrated by machines, as opposed to the natural intelligence displayed by animals including humans. AI research has been defined as the field of study of intelligent agents, which refers to any system that perceives its environment and takes actions that maximize its chance of achieving its goals.'),
+    (6, '2022-05-01', 'Veganism', 'Veganism is the practice of abstaining from the use of animal products, particularly in diet, and an associated philosophy that rejects the commodity status of animals.[c] An individual who follows the diet or philosophy is known as a vegan.');
 
 
 -- Create tags table
@@ -125,7 +137,8 @@ INSERT INTO `BlogTags` VALUES
     (2, 1),
     (3, 4),
     (4, 3),
-    (5, 5);
+    (5, 1),
+    (6, 5);
 
 -- Create comment table
 DROP TABLE IF EXISTS `comment`;
@@ -148,9 +161,13 @@ INSERT INTO comment (blog_id, user_id, date, sentiment, description) VALUES
     (1, 3, CURDATE(), 1, 'I love soccer too.'),
     -- blog 2 comment by user 3
     (2, 3, CURDATE(), 0, 'Bitcoin is a scam.'),
-    -- blog 5 comment by user 1
-    (5, 1, CURDATE(), 0, "I don't enjoy rock music."),
+    -- blog 6 comment by user 1
+    (6, 1, CURDATE(), 0, "I don't enjoy rock music."),
     -- blog 4 comment by user 2
-    (4, 2, CURDATE(), 1, "I love hiking too.");
+    (4, 2, CURDATE(), 1, "I love hiking too."),
+    -- blog 5 comment by user 2
+    (5, 2, CURDATE(), 1, "Ethereum is the future."),
+    -- blog 7 comment by user 1
+    (7, 1, CURDATE(), 0, "Cats suck, dogs are better.");
 
 SET FOREIGN_KEY_CHECKS = 1;
