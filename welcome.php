@@ -99,15 +99,17 @@
    <body>
       <div class="header">
          <h1>Welcome</h1> 
-         <?php
-            // session_start();
-            if (isset($_SESSION['sessionId'])) {
-               echo "You are logged in as '$_SESSION[sessionUser]' <br />";
-            } else {
-               echo "Home";
-            }
-         ?>
+        <?php
+           // session_start();
+           if (isset($_SESSION['sessionId'])) {
+              echo "You are logged in as '$_SESSION[sessionUser]' <br />";
+           } else {
+              echo "Home";
+           }
+        ?>
+        <a href = "Queries.php"><button>Search Blog</button></a>
       </div>
+  
       <div class="row">
          <?php foreach($query as $q) {?>
             <div class="col-4 d-flex justify-content-center align-items-center container">
