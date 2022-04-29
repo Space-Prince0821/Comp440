@@ -14,7 +14,7 @@
             margin: 0;
             background-color: var(--blue);
             color: white;
-            text-align: center;
+            text-align: left;
          }
          .header {
             background-color: var(--orange);
@@ -201,14 +201,14 @@
       <a href = "index.html"><button class="button signout">Sign Out</button></a>
       <div class="footer">
          <ul>
-            <li><a href=""><button>Query 1</button></a></li>
-            <li><a href=""><button>Query 2</button></a></li>
-            <li><a href=""><button>Query 3</button></a></li>
-            <li><a href=""><button>Query 4</button></a></li>
-            <li><a href=""><button>Query 5</button></a></li>
-            <li><a href=""><button>Query 6</button></a></li>
-            <li><a href=""><button>Query 7</button></a></li>
-            <li><a href=""><button>Query 8</button></a></li>
+            <li><a href="queries/Query1.php"><button>Query 1</button></a></li>
+            <li><a href="queries/Query2.php"><button>Query 2</button></a></li>
+            <li><a href="queries/Query3.php"><button>Query 3</button></a></li>
+            <li><a href="queries/Query4.php"><button>Query 4</button></a></li>
+            <li><a href="queries/Query5.php"><button>Query 5</button></a></li>
+            <li><a href="queries/Query6.php"><button>Query 6</button></a></li>
+            <li><a href="queries/Query7.php"><button>Query 7</button></a></li>
+            <li><a href="queries/Query8.php"><button>Query 8</button></a></li>
             <li><a href="queries/Query9.php"><button>Query 9</button></a></li>
          </ul>
       </div>
