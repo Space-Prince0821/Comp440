@@ -23,6 +23,9 @@
                 border: 2px solid white;
                 color: white;
             }
+            button:hover {
+                cursor: pointer;
+            }
         </style>
     </head>
     <body>
@@ -32,13 +35,30 @@
 
                 include "../Config.php";
 
-                $query = "SELECT count(*) FROM users";
+                // testing
+                // select distinct user_id
+                // from blog
+                // where (blog_id in (select blog_id from comment group by blog_id having max(sentiment = 0) = 0)
+                // and user_id not in (select user_id from blog where blog_id in (select blog_id from comment where sentiment = 0)))
+                // or blog_id not in (select blog_id from comment);
+
+                $query = "select username 
+                          from users 
+                          where user_id in (select distinct user_id 
+                                            from blog 
+                                            where user_id not in (select user_id 
+                                                                  from blog 
+                                                                  where blog_id in (select blog_id 
+                                                                                    from comment 
+                                                                                    where sentiment = 0)) 
+                                                                                    or blog_id not in (select blog_id 
+                                                                                                       from comment))";
 
                 $result = mysqli_query($db, $query);
 
-                $users = $result->fetch_array()[0] ?? '';
-
-                echo "<p>" . $users . "</p>";
+                while($users = $result->fetch_array()) {
+                    echo "<p>" . $users['username'] . "</p>";
+                }
 
             ?>
             <br>

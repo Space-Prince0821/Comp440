@@ -208,7 +208,7 @@
             <li><a href=""><button>Query 5</button></a></li>
             <li><a href=""><button>Query 6</button></a></li>
             <li><a href=""><button>Query 7</button></a></li>
-            <li><a href=""><button>Query 8</button></a></li>
+            <li><a href="queries/Query8.php"><button>Query 8</button></a></li>
             <li><a href="queries/Query9.php"><button>Query 9</button></a></li>
          </ul>
       </div>

@@ -173,6 +173,6 @@ INSERT INTO comment (blog_id, user_id, date, sentiment, description) VALUES
     -- blog 7 comment by user 1
     (7, 1, CURDATE(), 0, "Cats suck, dogs are better."),
     -- blog 10 comment by user 4
-    (10, 1, CURDATE(), 1, "I love surfing too, it is so relaxing.");
+    (10, 2, '2022-04-27', 1, "I love surfing too, it is so relaxing.");
 
 SET FOREIGN_KEY_CHECKS = 1;
