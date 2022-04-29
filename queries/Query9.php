@@ -11,6 +11,10 @@
                 margin: 0 auto;
                 background-color: var(--orange);
                 text-align: center;
+                color: white;
+            }
+            p {
+                margin: 10px;
             }
             button {
                 background-color: var(--blue);
@@ -23,7 +27,20 @@
     </head>
     <body>
         <div class="container">
-            <button>Run Query 9</button>
+            <p>Display those users such that all the blogs they posted so far never received any negative comments.</p>
+            <?php
+
+                include "../Config.php";
+
+                $query = "SELECT count(*) FROM users";
+
+                $result = mysqli_query($db, $query);
+
+                $users = $result->fetch_array()[0] ?? '';
+
+                echo "<p>" . $users . "</p>";
+
+            ?>
             <br>
             <a href="../welcome.php">
                 <button>Return to Home</button>
