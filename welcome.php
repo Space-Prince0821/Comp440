@@ -14,7 +14,7 @@
             margin: 0;
             background-color: var(--blue);
             color: white;
-            text-align: left;
+            text-align: center;
          }
          .header {
             background-color: var(--orange);
@@ -99,17 +99,15 @@
    <body>
       <div class="header">
          <h1>Welcome</h1> 
-        <?php
-           // session_start();
-           if (isset($_SESSION['sessionId'])) {
-              echo "You are logged in as '$_SESSION[sessionUser]' <br />";
-           } else {
-              echo "Home";
-           }
-        ?>
-        <a href = "Queries.php"><button>Search Blog</button></a>
+         <?php
+            // session_start();
+            if (isset($_SESSION['sessionId'])) {
+               echo "You are logged in as '$_SESSION[sessionUser]' <br />";
+            } else {
+               echo "Home";
+            }
+         ?>
       </div>
-  
       <div class="row">
          <?php foreach($query as $q) {?>
             <div class="col-4 d-flex justify-content-center align-items-center container">
@@ -147,6 +145,12 @@
                         $tag_blog_name = $result2->fetch_array()[0] ?? '';
 
                         $tags .= $tag_blog_name . " ";
+                        
+                        // echo '<div class="tags">';
+                        // echo '<p><strong>' . $tag_blog_name . '</strong></p>';
+                        // echo '</div>';
+
+                        //echo $tag_blog_name;
                      }
                      echo '<div class="tags">';
                      echo '<p><strong>' . $tags . '</strong></p>';
