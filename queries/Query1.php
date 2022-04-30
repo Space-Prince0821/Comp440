@@ -1,7 +1,7 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>Comment</title>
+        <title>Query1</title>
         <style>
             :root {
                 --blue: #095877;

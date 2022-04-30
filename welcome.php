@@ -147,12 +147,6 @@
                         $tag_blog_name = $result2->fetch_array()[0] ?? '';
 
                         $tags .= $tag_blog_name . " ";
-                        
-                        // echo '<div class="tags">';
-                        // echo '<p><strong>' . $tag_blog_name . '</strong></p>';
-                        // echo '</div>';
-
-                        //echo $tag_blog_name;
                      }
                      echo '<div class="tags">';
                      echo '<p><strong>' . $tags . '</strong></p>';
