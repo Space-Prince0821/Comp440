@@ -25,6 +25,9 @@
         <div class="container">
             <button>Run Query 3</button>
             <br>
+            <?php
+
+            ?>
             <a href="../welcome.php">
                 <button>Return to Home</button>
             </a>
