@@ -14,7 +14,7 @@
             margin: 0;
             background-color: var(--blue);
             color: white;
-            text-align: left;
+            text-align: center;
          }
          .header {
             background-color: var(--orange);
@@ -99,17 +99,15 @@
    <body>
       <div class="header">
          <h1>Welcome</h1> 
-        <?php
-           // session_start();
-           if (isset($_SESSION['sessionId'])) {
-              echo "You are logged in as '$_SESSION[sessionUser]' <br />";
-           } else {
-              echo "Home";
-           }
-        ?>
-        <a href = "Queries.php"><button>Search Blog</button></a>
+         <?php
+            // session_start();
+            if (isset($_SESSION['sessionId'])) {
+               echo "You are logged in as '$_SESSION[sessionUser]' <br />";
+            } else {
+               echo "Home";
+            }
+         ?>
       </div>
-  
       <div class="row">
          <?php foreach($query as $q) {?>
             <div class="col-4 d-flex justify-content-center align-items-center container">
@@ -147,6 +145,12 @@
                         $tag_blog_name = $result2->fetch_array()[0] ?? '';
 
                         $tags .= $tag_blog_name . " ";
+                        
+                        // echo '<div class="tags">';
+                        // echo '<p><strong>' . $tag_blog_name . '</strong></p>';
+                        // echo '</div>';
+
+                        //echo $tag_blog_name;
                      }
                      echo '<div class="tags">';
                      echo '<p><strong>' . $tags . '</strong></p>';
@@ -197,13 +201,13 @@
       <a href = "index.html"><button class="button signout">Sign Out</button></a>
       <div class="footer">
          <ul>
-            <li><a href="queries/Query1.php"><button>Query 1</button></a></li>
-            <li><a href="queries/Query2.php"><button>Query 2</button></a></li>
-            <li><a href="queries/Query3.php"><button>Query 3</button></a></li>
-            <li><a href="queries/Query4.php"><button>Query 4</button></a></li>
-            <li><a href="queries/Query5.php"><button>Query 5</button></a></li>
-            <li><a href="queries/Query6.php"><button>Query 6</button></a></li>
-            <li><a href="queries/Query7.php"><button>Query 7</button></a></li>
+            <li><a href=""><button>Query 1</button></a></li>
+            <li><a href=""><button>Query 2</button></a></li>
+            <li><a href=""><button>Query 3</button></a></li>
+            <li><a href=""><button>Query 4</button></a></li>
+            <li><a href=""><button>Query 5</button></a></li>
+            <li><a href=""><button>Query 6</button></a></li>
+            <li><a href=""><button>Query 7</button></a></li>
             <li><a href="queries/Query8.php"><button>Query 8</button></a></li>
             <li><a href="queries/Query9.php"><button>Query 9</button></a></li>
          </ul>
