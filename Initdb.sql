@@ -103,8 +103,7 @@ INSERT INTO `blog` (user_id, date, subject, description) VALUES
     (5, CURDATE(), 'Rock Music', "Rock music is a broad genre of popular music that originated as 'rock and roll' in the United States in the late 1940s and early 1950s, developing into a range of different styles in the mid-1960s and later, particularly in the United States and the United Kingdom.[2] It has its roots in 1940s and 1950s rock and roll, a style that drew directly from the blues and rhythm and blues genres of African-American music and from country music."),
     (3, '2022-05-01', 'Cats', "The cat (Felis catus) is a domestic species of small carnivorous mammal.[1][2] It is the only domesticated species in the family Felidae and is often referred to as the domestic cat to distinguish it from the wild members of the family."),
     (6, '2022-05-01', 'Artificial Intelligence', 'Artificial intelligence (AI) is intelligence demonstrated by machines, as opposed to the natural intelligence displayed by animals including humans. AI research has been defined as the field of study of intelligent agents, which refers to any system that perceives its environment and takes actions that maximize its chance of achieving its goals.'),
-    (6, '2022-05-01', 'Veganism', 'Veganism is the practice of abstaining from the use of animal products, particularly in diet, and an associated philosophy that rejects the commodity status of animals.[c] An individual who follows the diet or philosophy is known as a vegan.'),
-    (4, '2022-04-27', 'Surfing', 'Surfing is a surface water sport in which an individual, a surfer (or two in tandem surfing), uses a board to ride on the forward section, or face, of a moving wave of water, which usually carries the surfer towards the shore. Waves suitable for surfing are primarily found on ocean shores, but can also be found in standing waves in the open ocean, in lakes, in rivers in the form of a tidal bore, or in wave pools.');
+    (6, '2022-05-01', 'Veganism', 'Veganism is the practice of abstaining from the use of animal products, particularly in diet, and an associated philosophy that rejects the commodity status of animals.[c] An individual who follows the diet or philosophy is known as a vegan.');
 
 
 -- Create tags table
@@ -139,9 +138,7 @@ INSERT INTO `BlogTags` VALUES
     (3, 4),
     (4, 3),
     (5, 1),
-    (6, 5),
-    (10, 2),
-    (10, 3);
+    (6, 5);
 
 -- Create comment table
 DROP TABLE IF EXISTS `comment`;
@@ -171,8 +168,6 @@ INSERT INTO comment (blog_id, user_id, date, sentiment, description) VALUES
     -- blog 5 comment by user 2
     (5, 2, CURDATE(), 1, "Ethereum is the future."),
     -- blog 7 comment by user 1
-    (7, 1, CURDATE(), 0, "Cats suck, dogs are better."),
-    -- blog 10 comment by user 4
-    (10, 2, '2022-04-27', 1, "I love surfing too, it is so relaxing.");
+    (7, 1, CURDATE(), 0, "Cats suck, dogs are better.");
 
 SET FOREIGN_KEY_CHECKS = 1;
