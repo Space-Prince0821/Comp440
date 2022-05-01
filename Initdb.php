@@ -3,14 +3,24 @@
     <head>
         <meta charset="utf-8">
         <title>Initdb</title>
+        <link rel="stylesheet" type="text/css" href="style.css">
         <style>
+            :root {
+                --blue: #095877;
+                --orange: #f64e20;
+            }
             body {
                 margin: 0 auto;
+                color: white;
             }
             div {
                 width: 100%;
                 text-align: center;
                 margin-top: 50px;
+                font-size: 20px;
+            }
+            #btn {
+                background-color: var(--orange);
             }
         </style>
     </head>
@@ -79,7 +89,7 @@
         </div>
         <div>
             <a href="index.html">
-                <button>Return to Login</button>
+                <button id="btn">Return to Login</button>
             </a>
         </div>
     </body>
