@@ -23,8 +23,17 @@
     </head>
     <body>
         <div class="container">
-            <button>Run Query 3</button>
+            <button>Query 3: Listing users who posted the most blogs on 05/01/2022 </button>
             <br>
+            <?php
+                include('../Config.php');
+                $currDate = "2022-05-01";
+                $dateStmt = "SELECT user_id FROM blog WHERE date = '$currDate'";
+                $resultStmt = mysqli_query($db, $dateStmt);
+                foreach($resultStmt as $z) {
+                    echo '<p>' . $z['user_id'] . '</p>';
+                }
+            ?>
             <a href="../welcome.php">
                 <button>Return to Home</button>
             </a>
