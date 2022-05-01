@@ -59,8 +59,15 @@
             if (mysqli_stmt_execute($stmt)) {
                 echo "Registeration Complete!";
 
+                // Hobbies
+                $query = "SELECT user_id FROM users WHERE username = \"$param_username\"";
+
+                $result = mysqli_query($db, $query);
+
+                $newUserId = $result->fetch_array()[0] ?? '';
+
                 // Redirect  to login if registeration is complete
-                header("location: index.html");
+                // header("location: index.html");
             }
             else {
                 echo "Oops! Something went wrong!";
@@ -68,6 +75,7 @@
 
             mysqli_stmt_close($stmt);
         }
+
         // Close connection
         mysqli_close($db);
     }
