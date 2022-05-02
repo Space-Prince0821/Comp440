@@ -81,6 +81,12 @@
                         echo "<p>Password did not match!</p>";
                         displayReturn();
                         die();
+                    };
+
+                    if (strpos($email, '@') == false) {
+                        echo "<p>Email not valid.</p>";
+                        displayReturn();
+                        die();
                     }
 
                     // Insert into users table, new user info
