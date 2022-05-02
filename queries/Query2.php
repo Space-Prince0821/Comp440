@@ -107,6 +107,9 @@
                     <button name="new_search">Search</button>  
                 </p>  
             </form>
+            <a href="../welcome.php">
+                <button>Return to Home</button>
+            </a>
             <?php
                 include('../Config.php');
                 $inputName = $_REQUEST["user00"];
@@ -119,8 +122,6 @@
                 $getBlogQuery = mysqli_query($db, $getBlog);
                 $getBlogQueryResult = $getBlogQuery->fetch_array()[0] ?? '';
 
-                echo 'ID: ' . $sqlStmtQueryResult . '<br>';
-                echo 'Blog_ids: ';
                 foreach($getBlogQuery as $g){
                     $blogID = $g['blog_id'];
                     $mood = 1;
@@ -190,10 +191,6 @@
                 }
             ?>
             <br>
-            <br>
-            <a href="../welcome.php">
-                <button>Return to Home</button>
-            </a>
         </div>
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
