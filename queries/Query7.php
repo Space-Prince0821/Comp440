@@ -19,11 +19,26 @@
                 border: 2px solid white;
                 color: white;
             }
+            h3 {
+                color: white;
+            }
+            p{
+                color: white;
+            }
         </style>
     </head>
     <body>
         <div class="container">
-            <button>Run Query 7</button>
+            <h3>Query 7: Display all users who never posted a comment</h3>
+            <br>
+            <?php
+                include('../Config.php');
+                $query = "SELECT username FROM users WHERE user_id NOT IN (SELECT distinct user_id FROM comment)";
+                $queryResult = mysqli_query($db, $query);
+                foreach($queryResult as $p) {
+                    echo '<p>' . $p['username'] . '</p>';
+                }
+            ?>
             <br>
             <a href="../welcome.php">
                 <button>Return to Home</button>
