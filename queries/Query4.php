@@ -30,62 +30,34 @@
             <h3 style="color: white;">Query 4: Users who are followed by user X  and user Y</h3>
             <br>
 
-            <form name="form" action="" method="get">
-                <input type="text" name="userX" id="userX" value="">
-                <input type="text" name="userY" id="userY" value="">
+            <!-- <form name="form" action="get-method.php" method="get">
+                <input type="text" name="userX" value="">
+                <input type="text" name="userY" value="">
                 <br>
                 <input type="submit" name="submit" />
-            
+            </form> -->
 
             <?php 
-                // $userX = $_REQUEST['userX'];
-                // $userY = $_REQUEST['userY'];
-                // $id_X='';
-                // $id_Y='';
-
-                // $getUlist = "SELECT * FROM users 
-                // WHERE username=$userX AND username=$userY";
-                // $uResult = mysqli_query($db, $getUlist);
-            
-                if(isset($_POST['submit']) && isset($_GET["userX"]) && 
-                         $_GET["userX"] != "" && isset($_GET["userY"]) && 
-                         $_GET["userY"] != "") {
-                    echo 'works';
-
-                    $userX = $_REQUEST['userX'];
-                    $userY = $_REQUEST['userY'];
-                    $id_X='';
-                    $id_Y='';
-
-                    $getUlist = "SELECT * FROM users 
-                    WHERE username=$userX AND username=$userY";
-                    $uResult = mysqli_query($db, $getUlist);
-                    
-                    foreach($uResult as $uResultRow) {
-                        $temp_id = $uResultRow['user_id'];
-                        if($uResultRow['username'] == $userX) {
-                            $id_X = $uResultRow['user_id'];
-                        }
-                        if($uResultRow['username'] == $userY) {
-                            $id_Y = $uResultRow['user_id'];
-                        }
-
-                        $sql = "SELECT * FROM follow GROUP BY user_id 
-                        HAVING COUNT(user_id) > 1 
-                        AND follows_user_id=$id_X OR follows_user_id=$id_Y";
-                        $result = mysqli_query($db, $sql);
-    
-                        foreach($result as $resultRow) {
-                            echo $userX . ' and ' . $userY . ' follow: ' . 
-                            '<button>' . $resultRow['username'] . '</button>';
-                        }
-                        
-                    }
-                }
-
+                // if(isset($_GET['submit'])) {
+                //     $userX = $_GET['userX'];
+                //     $userY = $_GET['userY'];
                 
+                    $sql = "SELECT username from users
+                            WHERE user_id in (SELECT follows_user_id
+                                FROM follow
+                                WHERE user_id in (select user_id from users where username='brandon')
+                                OR user_id in (select user_id from users where username='prince')
+                                GROUP BY follows_user_id
+                                HAVING count(*) > 1)";
+
+
+                    $result = mysqli_query($db, $sql);
+
+                    while($users = $result->fetch_array()) {
+                        echo "<p>" . $users['username'] . "</p>";
+                    }
+                //}
             ?>
-            </form>
             <a href="../welcome.php">
                 <button>Return to Home</button>
             </a>
