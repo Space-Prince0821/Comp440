@@ -19,6 +19,9 @@
                 border: 2px solid white;
                 color: white;
             }
+            p{
+                color: white;
+            }
         </style>
     </head>
     <body>
@@ -27,32 +30,26 @@
             <br>
             <?php
                 include('../Config.php');
+
                 $currDate = "2022-05-01";
-                $dateStmt = "SELECT distinct user_id FROM blog WHERE date = '$currDate'";
-                $resultStmt = mysqli_query($db, $dateStmt);
                 $countArr = array();
-                foreach($resultStmt as $z) {
-                    $currUser = $z['user_id'];
-                    $getUsername = "SELECT username FROM users WHERE user_id = '$currUser'";
-                    $getUsernameQuery = mysqli_query($db, $getUsername);
-                    $actualUsername = $getUsernameQuery->fetch_array()[0] ?? '';
-                    $count = 0;
-                    $prepQuery = "SELECT blog_id FROM blog WHERE user_id = '$currUser'";
-                    $resQuery = mysqli_query($db, $prepQuery);
-                    foreach($resQuery as $r) {
-                        $count = $count + 1;
-                    }
-                    array_push($countArr, $count);
-                    echo '<p>' . $actualUsername . ' posted ' . $count . ' blogs on ' . $currDate . '</p>';
+                $query = "SELECT distinct user_id FROM blog WHERE date = '$currDate'";
+                $result = mysqli_query($db, $query);
+                foreach($result as $t) {
+                    $curr_id = $t['user_id'];
+                    $query2 = "SELECT COUNT(user_id) FROM blog WHERE user_id = '$curr_id'";
+                    $result2 = mysqli_query($db, $query2);
+                    $currCount = $result2->fetch_array()[0] ?? '';
+                    array_push($countArr, $currCount);
                 }
-                $maxBlogNum = max($countArr);
-                $prep = "SELECT user_id FROM blog GROUP BY user_id HAVING COUNT(blog_id) = $maxBlogNum";
-                $res = mysqli_query($db, $prep);
-                $showRes = $res->fetch_array()[0] ?? '';
-                $userWithMostPostsQueryStmt = "SELECT username FROM users WHERE user_id='$showRes'";
-                $userWithMostPostsQueryStmtQuery = mysqli_query($db, $userWithMostPostsQueryStmt);
-                $userWithMostPostsQueryStmtQueryResult = $userWithMostPostsQueryStmtQuery->fetch_array()[0] ?? '';
-                echo '<p><strong> User "' . $userWithMostPostsQueryStmtQueryResult . '" has posted the most blogs on ' . $currDate . '</strong></p>'; 
+                $max = max($countArr);
+                $query3 = "SELECT distinct user_id FROM blog WHERE date = '$currDate' GROUP BY user_id HAVING COUNT(date) = $max";
+                $query3Result = mysqli_query($db, $query3);
+                $test = $query3Result->fetch_array()[0] ?? '';
+                $finalQuery = "SELECT username FROM users WHERE user_id = '$test'";
+                $finalResult = mysqli_query($db, $finalQuery);
+                $finalAnswer = $finalResult->fetch_array()[0] ?? '';
+                echo '<p>' . $finalAnswer . ' posted the most blogs on 2022-05-01 </p>';
             ?>
             <a href="../welcome.php">
                 <button>Return to Home</button>
