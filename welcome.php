@@ -57,7 +57,6 @@
          .tags {
             border-top: 2px solid white;
             text-align: center;
-            padding-top: 10px;
          }
          .button {
             border-radius: 10px;
@@ -93,6 +92,14 @@
             width: 100px;
             background-color: var(--blue);
             border-radius: 10px;
+         }
+         .tagDiv {
+            display: inline-block;
+            border: 1px solid white;
+            margin: 2px;
+            background-color: gray;
+            border-radius: 5px;
+            padding: 5px;
          }
         </style>
    </head>
@@ -138,6 +145,7 @@
 
                      $tags = '';
 
+                     echo '<div class="tags">';
                      foreach($sqlquery as $p) {
                         $s = $p['tag_id'];
                         $tag_query = "SELECT tag_name FROM tags WHERE tag_id=$s";
@@ -147,13 +155,11 @@
                         $tags .= $tag_blog_name . " ";
                         
                         // echo '<div class="tags">';
-                        // echo '<p><strong>' . $tag_blog_name . '</strong></p>';
+                        echo '<div class="tagDiv"><strong>' . $tag_blog_name . '</strong></div>';
                         // echo '</div>';
 
                         //echo $tag_blog_name;
                      }
-                     echo '<div class="tags">';
-                     echo '<p><strong>' . $tags . '</strong></p>';
                      echo '</div>';
                   ?>
                   <div class="comments">
