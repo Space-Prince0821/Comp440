@@ -29,34 +29,21 @@
             <br>
             <h3 style="color: white;">Query 4: Users who are followed by user X  and user Y</h3>
             <br>
-
-            <!-- <form name="form" action="get-method.php" method="get">
-                <input type="text" name="userX" value="">
-                <input type="text" name="userY" value="">
-                <br>
-                <input type="submit" name="submit" />
-            </form> -->
-
             <?php 
-                // if(isset($_GET['submit'])) {
-                //     $userX = $_GET['userX'];
-                //     $userY = $_GET['userY'];
-                
-                    $sql = "SELECT username from users
-                            WHERE user_id in (SELECT follows_user_id
-                                FROM follow
-                                WHERE user_id in (select user_id from users where username='brandon')
-                                OR user_id in (select user_id from users where username='prince')
-                                GROUP BY follows_user_id
-                                HAVING count(*) > 1)";
+                $sql = "SELECT username from users
+                        WHERE user_id in (SELECT follows_user_id
+                            FROM follow
+                            WHERE user_id in (select user_id from users where username='brandon')
+                            OR user_id in (select user_id from users where username='prince')
+                            GROUP BY follows_user_id
+                            HAVING count(*) > 1)";
 
 
-                    $result = mysqli_query($db, $sql);
+                $result = mysqli_query($db, $sql);
 
-                    while($users = $result->fetch_array()) {
-                        echo "<p>" . $users['username'] . "</p>";
-                    }
-                //}
+                while($users = $result->fetch_array()) {
+                    echo "<p>" . $users['username'] . "</p>";
+                }
             ?>
             <a href="../welcome.php">
                 <button>Return to Home</button>

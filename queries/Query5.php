@@ -36,10 +36,10 @@
                 foreach($result as $resultRow) {
                     $hob = $resultRow['hobby_id'];
                     $sql = "SELECT username from users where user_id in
-                            (SELECT * from userhobbies where hobby_id=$hob)";
+                            (SELECT user_id from userhobbies where hobby_id=$hob)";
                     $res = mysqli_query($db, $sql);
-                    foreach($res as $resRow) { 
-                        echo "<p>Hobby " . $resultRow['hobby_id'] .": ". $resRow['username'] . "</p>";
+                    foreach($res as $row) {
+                        echo "<p>Hobby " . $resultRow['hobby_id'] .": ". $row['username'] . "</p>";
                     }   
                 }
             ?>
