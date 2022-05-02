@@ -21,6 +21,7 @@ h1 {
     padding: 50px;  
     color: white;
     text-align: left;
+    min-width: 400px;
 }
 
 #frm label {
@@ -37,7 +38,7 @@ h1 {
     color: white;  
     background: var(--blue);  
     padding: 7px 10px; 
-    font-size: 18px;
+    font-size: 16px;
 }
 
 .init-form {
@@ -58,7 +59,7 @@ h1 {
     color: white;  
     background: var(--orange);  
     padding: 7px 10px; 
-    font-size: 18px;
+    font-size: 16px;
 }
 
 .init-button:hover {
@@ -78,4 +79,27 @@ h1 {
 
 table {
     width: 100%;
+}
+
+.form-control {
+    background-color: var(--orange);
+}
+
+.form-control:focus {
+    background-color: var(--orange);
+    color: white;
+}
+
+::placeholder {
+    color: white !important;
+    opacity: 0.5 !important;
+}
+
+.blog {
+    text-align: center;
+}
+
+.blog button {
+    background-color: var(--orange) !important;
+    margin-top: 10px;
 }

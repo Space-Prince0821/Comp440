@@ -26,7 +26,18 @@
             <br>
             <h3 style="color: white;">Query 5: Users with common hobbies</h3>
             <br>
-            <?php 
+            <?php
+
+                // select A.username, B.username
+                // from users as A, users as B
+                // where (A.user_id, B.user_id) in (
+                // select A.user_id, B.user_id
+                // from userhobbies as A, userhobbies as B
+                // where A.user_id in (select user_id from userhobbies where hobby_id in (select hobby_id from userhobbies group by hobby_id having count(*) > 1))
+                // and A.hobby_id = B.hobby_id
+                // and A.user_id != B.user_id
+                // and A.user_id < B.user_id);
+
                 include("../Config.php");
                 $tempArr = array();
                 $query05 = "SELECT * from userhobbies

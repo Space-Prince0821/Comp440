@@ -7,8 +7,14 @@
         <meta charset="utf-8">
         <title>Comment</title>
         <style>
+            :root {
+                --blue: #095877;
+                --orange: #f64e20;
+            }
             body {
                 margin: 0 auto;
+                background-color: var(--blue);
+                color: white;
             }
             div {
                 width: 100%;
@@ -25,14 +31,27 @@
             .container {
                 margin-top: 20px;
                 padding-top: 20px;
-                border-top: 5px solid black;
+                border-top: 5px solid white;
+                min-width: 400px;
             }
             .form-element {
                 margin: 10px;
+                background-color: var(--orange);
+                color: white;
             }
             .description {
-                width: 300px;
-                height: 50px;
+                width: 400px;
+                height: 100px;
+            }
+            #btn {  
+                color: white;  
+                background: var(--orange);  
+                padding: 7px 10px; 
+                font-size: 16px;
+            }
+            #btn:hover {
+                cursor: pointer;
+                opacity: 0.8;
             }
         </style>
     </head>
@@ -122,7 +141,7 @@
 
                 }
                 ?>
-                <div class="container">
+                <div class="container comment">
                     <form name="comment-form" action="" method="post">
                         <select name="sentiment" class="form-element sentiment-option">
                             <option value="Positive" selected>Positive</option>
@@ -131,7 +150,7 @@
                         <br />
                         <textarea name="description" class="form-element description"></textarea>
                         <br />
-                        <input type="submit" name="addComment" class="form-element" value="Add comment"></input>
+                        <input id="btn" type="submit" name="addComment" class="form-element" value="Add comment"></input>
                         <input type="hidden" name="blogId" value=<?php echo $blogId ?>></input>
                         <input type="hidden" name="blogUserId" value=<?php echo $blogUserId ?>></input>
                     </form>
@@ -140,7 +159,7 @@
             }
             ?>
             <a href="welcome.php">
-                <button>Return to Home</button>
+                <button id="btn">Return to Home</button>
             </a>
         </div>
     </body>
