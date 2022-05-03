@@ -40,54 +40,62 @@
     <body>
         <div class="container">
             <br>
-            <h3 style="color: white;">Query 1: Users who post at least two blogs</h3>
-            <br>
-            <?php 
-                include("../Login.php");
+            <h3 style="color: white;">Query 1: Users who post at least two blogs with selected tags</h3>
+            <form method="POST">  
+                <div>  
+                    <label for="tagForm">Select tag 1: </label>  
+                    <select name="tagForm">
+                        <?php
+                            include('../Config.php');
+                            $query = "SELECT tag_name FROM tags";
+                            $result = mysqli_query($db, $query);
+                            foreach($result as $r){
+                                $selTag1 = $r['tag_name'];
+                                echo '<option>' . $selTag1 . '</option>';
+                            }
+                        ?>
+                    </select>   
+                </div>  
+                <br>
+                <div>  
+                    <label for="tagForm2">Select tag 2: </label>  
+                    <select name="tagForm2">
+                        <?php
+                            include('../Config.php');
+                            $query = "SELECT tag_name FROM tags";
+                            $result = mysqli_query($db, $query);
+                            foreach($result as $r) {
+                                $selTag2 = $r['tag_name'];
+                                echo '<option>' . $selTag2 . '</option>';
+                            }
+                        ?>
+                    </select>   
+                </div>
+                <p>     
+                    <button name="search_tag">Click to search blog</button>  
+                </p>  
+            </form>
+            <?php
                 include("../Config.php");
 
-                $query01 = "SELECT user_id FROM blog GROUP BY user_id HAVING COUNT(user_id) > 1";
-                //For userID and username with 2 or more posts
-                //Will have user IDs (1, 2, 3...)
-                $result01 = mysqli_query($db, $query01);
+                //These are the tags stores in variables once the user chooses from dropdown
+                $selTag1Query = $_REQUEST["tagForm"]; 
+                $selTag2Query = $_REQUEST["tagForm2"];
+                echo '<p> Tag 1 Name: ' . $selTag1Query . '</p>';   
+                echo '<p> Tag 2 Name: ' . $selTag2Query . '</p>';
 
-                //For each user with 2 or more posts
-                foreach($result01 as $p0) {
-                    //Used to get username using user_id
-                   $user_id0 = $p0['user_id'];
+                //We get tag_id based on tag names chosen from dropdown
+                $query1 = "SELECT tag_id FROM tags WHERE tag_name = '$selTag1Query'";
+                $query1Res = mysqli_query($db, $query1);
+                $tagID1 = $query1Res->fetch_array()[0] ?? '';
+                $query2 = "SELECT tag_id FROM tags WHERE tag_name = '$selTag2Query'";
+                $query2Res = mysqli_query($db, $query2);
+                $tagID2 = $query2Res->fetch_array()[0] ?? '';
+                
+                echo '<p> Tag 1 ID: ' . $tagID1 . '</p>';
+                echo '<p> Tag 2 ID: ' . $tagID2 . '</p>';
 
-                   //Getting all blog_ids of users from blog table in order 
-                   //to get tag_id from BlogTags table
-                   //May contain more than one tag_id
-                   $tags = "SELECT blog_id FROM blog WHERE user_id = $user_id0";
-                   $tagsQuery = mysqli_query($db, $tags);
-
-                   echo "<ul>";
-
-                   //For each blog_id, find tag_ids (Each blog may have one or more tags, may also have 0 tags)
-                   foreach($tagsQuery as $p1) {
-                    //Saving blog_id as param
-                    $blog_id0 = $p1['blog_id'];
-                    //get tag_ids from BlogTags table based on blog_id
-                    $res = "SELECT tag_id FROM BlogTags WHERE blog_id = $blog_id0";
-                    $resQuery = mysqli_query($db, $res);
-
-                    //For each tag_id from the blog post, get tag name
-                    foreach($resQuery as $p2) {
-                        $tag_id0 = $p2['tag_id'];
-                        $tagName = "SELECT tag_name FROM tags WHERE tag_id = $tag_id0";
-                        $tagQuery2 = mysqli_query($db, $tagName);
-                        $tagName2 = $tagQuery2->fetch_array()[0] ?? '';
-                        echo '<li>' . $tagName2 . '</li>';
-                    }
-                   }
-                   echo "</ul>";
-                   $userQuery = "SELECT username FROM users WHERE user_id = $user_id0";
-                   $result02 = mysqli_query($db, $userQuery);
-                   
-                   $username_from_blog = $result02->fetch_array()[0] ?? '';
-                   echo '<p><strong>' . $username_from_blog . '</strong></p>';
-                }
+                //Then I dont know what to do...
             ?>
             <a href="../welcome.php">
                 <button>Return to Home</button>
