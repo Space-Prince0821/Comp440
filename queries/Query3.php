@@ -11,6 +11,8 @@
                 margin: 0 auto;
                 background-color: var(--orange);
                 text-align: center;
+                color: white;
+                margin-top: 20px;
             }
             button {
                 background-color: var(--blue);
@@ -19,14 +21,15 @@
                 border: 2px solid white;
                 color: white;
             }
-            p{
-                color: white;
+            button:hover {
+                cursor: pointer;
+                opacity: 0.8;
             }
         </style>
     </head>
     <body>
     <div class="container">
-        <button>Query 3: Listing users who posted the most blogs on 05/01/2022 </button>
+        <p>Query 3: Listing users who posted the most blogs on 05/01/2022 </p>
             <br>
             <?php
                 include('../Config.php');

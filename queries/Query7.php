@@ -11,6 +11,7 @@
                 margin: 0 auto;
                 background-color: var(--orange);
                 text-align: center;
+                color: white;
             }
             button {
                 background-color: var(--blue);
@@ -19,11 +20,9 @@
                 border: 2px solid white;
                 color: white;
             }
-            h3 {
-                color: white;
-            }
-            p{
-                color: white;
+            button:hover {
+                cursor: pointer;
+                opacity: 0.8;
             }
         </style>
     </head>

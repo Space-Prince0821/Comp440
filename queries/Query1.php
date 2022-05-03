@@ -11,6 +11,7 @@
                 margin: 0 auto;
                 background-color: var(--orange);
                 text-align: center;
+                color: white;
             }
             button {
                 background-color: var(--blue);
@@ -18,6 +19,21 @@
                 padding: 5px 10px;
                 border: 2px solid white;
                 color: white;
+            }
+            button:hover {
+                cursor: pointer;
+                opacity: 0.8;
+            }
+            ul {
+                list-style-type: none;
+                background-color: var(--blue);
+                width: 40%;
+                margin: 10px auto;
+                padding: 10px;
+            }
+            li {
+                display: inline-block;
+                padding-right: 15px;
             }
         </style>
     </head>
@@ -46,6 +62,8 @@
                    $tags = "SELECT blog_id FROM blog WHERE user_id = $user_id0";
                    $tagsQuery = mysqli_query($db, $tags);
 
+                   echo "<ul>";
+
                    //For each blog_id, find tag_ids (Each blog may have one or more tags, may also have 0 tags)
                    foreach($tagsQuery as $p1) {
                     //Saving blog_id as param
@@ -60,9 +78,10 @@
                         $tagName = "SELECT tag_name FROM tags WHERE tag_id = $tag_id0";
                         $tagQuery2 = mysqli_query($db, $tagName);
                         $tagName2 = $tagQuery2->fetch_array()[0] ?? '';
-                        echo '<button>' . $tagName2 . '</button>';
+                        echo '<li>' . $tagName2 . '</li>';
                     }
                    }
+                   echo "</ul>";
                    $userQuery = "SELECT username FROM users WHERE user_id = $user_id0";
                    $result02 = mysqli_query($db, $userQuery);
                    

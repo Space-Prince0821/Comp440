@@ -92,12 +92,16 @@
                 background-color: var(--blue);
                 border-radius: 10px;
             }
+            button:hover {
+                cursor: pointer;
+                opacity: 0.8;
+            }
         </style>
     </head>
     <body>
         <div class="container">
             <br>
-            <h3 style="color: white;">Query 2: Find all blogs of user X with only poisitve comments</h3>
+            <h3 style="color: white;">Query 2: Find all blogs of user X with only positive comments</h3>
             <form method="POST">  
                 <p>  
                     <label>Enter username: </label>  

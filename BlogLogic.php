@@ -26,13 +26,21 @@
         $blog_desc = $_REQUEST["blog_desc"];
         $blog_tag = $_REQUEST["blog_tag"];
 
+        $split_tags = explode(", ", $blog_tag);
+
         //Insert post info into blog table
         $sql = "INSERT INTO blog(user_id, date, subject, description) VALUES('$user_id', '$date', '$blog_title', '$blog_desc')";
         mysqli_query($db, $sql);
 
         //Insert tag name in tags table
-        $sql2 = "INSERT INTO tags(tag_name) VALUES('$blog_tag')";
-        mysqli_query($db, $sql2);
+        foreach($split_tags as $t) {
+            $query1 = "SELECT * FROM tags WHERE tag_name = \"$t\"";
+            $result1 = mysqli_query($db, $query1);
+            if (mysqli_num_rows($result1) == 0) {
+                $sql2 = "INSERT INTO tags(tag_name) VALUES('$t')";
+                mysqli_query($db, $sql2);
+            }
+        }
 
         //Get current blog id
         $sql4 = "SELECT * FROM blog";
@@ -45,18 +53,20 @@
         }
 
         //Get current tag id
-        $sql5 = "SELECT * FROM tags";
-        $query4 = mysqli_query($db, $sql5);
-        $tag_id_number = '';
-        foreach($query4 as $q2) {
-            if($blog_tag == $q2['tag_name']) {
-                $tag_id_number = $q2['tag_id'];
+        foreach($split_tags as $t) {
+            $sql5 = "SELECT * FROM tags";
+            $query4 = mysqli_query($db, $sql5);
+            $tag_id_number = '';
+            foreach($query4 as $q2) {
+                if($t == $q2['tag_name']) {
+                    $tag_id_number = $q2['tag_id'];
+                }
             }
-        }
 
-        //Inserting blog_id and tag_id for BlogTags table
-        $sql3 = "INSERT INTO BlogTags(blog_id, tag_id) VALUES('$blog_id_number', '$tag_id_number')";
-        mysqli_query($db, $sql3);
+            //Inserting blog_id and tag_id for BlogTags table
+            $sql3 = "INSERT INTO BlogTags(blog_id, tag_id) VALUES('$blog_id_number', '$tag_id_number')";
+            mysqli_query($db, $sql3);
+        }
 
         header("Location: welcome.php?success=newPost");
         exit();
