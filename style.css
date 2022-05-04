@@ -1,105 +1,17 @@
-:root {
-    --blue: #095877;
-    --orange: #f64e20;
+html, body {
+    height: 100%;
 }
-
-body {   
-    background: var(--blue);
-}
-
-h1 {
-    border-bottom: 2px solid white;
-    padding-bottom: 10px;
-}
-
-#frm {  
-    border: solid white 1px;  
-    width: 30%;  
-    border-radius: 2px;  
-    margin: 120px auto;  
-    background: var(--orange);  
-    padding: 50px;  
-    color: white;
-    text-align: left;
-    min-width: 400px;
-}
-
-#frm label {
-    font-size: 20px;
-    font-weight: bold;
-}
-
-#frm input[type="text"], #frm input[type="password"]  {
-    padding: 5px;
-    width: 50%;
-}
-
-#btn {  
-    color: white;  
-    background: var(--blue);  
-    padding: 7px 10px; 
-    font-size: 16px;
-}
-
-.init-form {
-    margin: 0 auto;
-    width: 130px;
-}
-
-.login, .register {
-    display: inline-block;
-}
-
-#btn:hover {
-    cursor: pointer;
-    opacity: 0.8;
-}
-
-.init-button {
-    color: white;  
-    background: var(--orange);  
-    padding: 7px 10px; 
-    font-size: 16px;
-}
-
-.init-button:hover {
-    cursor: pointer;
-    opacity: 0.8;
-}
-
-.hobbies {
-    background-color: var(--blue);
-    padding: 10px;
-    border: 2px solid white;
-}
-
-.hobbies label {
-    font-weight: normal !important;
-}
-
-table {
+.form-signin {
     width: 100%;
+    max-width: 330px;
+    padding: 15px;
+    margin: auto;
 }
 
-.form-control {
-    background-color: var(--orange);
-}
-
-.form-control:focus {
-    background-color: var(--orange);
-    color: white;
-}
-
-::placeholder {
-    color: white !important;
-    opacity: 0.5 !important;
-}
-
-.blog {
-    text-align: center;
-}
-
-.blog button {
-    background-color: var(--orange) !important;
-    margin-top: 10px;
+body {
+    display: flex;
+    align-items: center;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    background-color: #f5f5f5;
 }

@@ -1,166 +1,118 @@
 <?php
-    session_start();
-    include('Config.php');
+session_start();
+include('Config.php');
 ?>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <title>Comment</title>
-        <style>
-            :root {
-                --blue: #095877;
-                --orange: #f64e20;
-            }
-            body {
-                margin: 0 auto;
-                background-color: var(--blue);
-                color: white;
-            }
-            div {
-                width: 100%;
-                text-align: center;
-                margin-top: 20px;
-            }
-            h5 {
-                font-size: 20px;
-                margin-bottom: 0px;
-            }
-            p {
-                padding: 0px 50px;
-            }
-            .container {
-                margin-top: 20px;
-                padding-top: 20px;
-                border-top: 5px solid white;
-                min-width: 400px;
-            }
-            .form-element {
-                margin: 10px;
-                background-color: var(--orange);
-                color: white;
-            }
-            .description {
-                width: 400px;
-                height: 100px;
-            }
-            #btn {  
-                color: white;  
-                background: var(--orange);  
-                padding: 7px 10px; 
-                font-size: 16px;
-            }
-            #btn:hover {
-                cursor: pointer;
-                opacity: 0.8;
-            }
-        </style>
-    </head>
-    <body>
-        <div>
-            <?php
-            if (isset($_POST['addComment'])) {
 
-                if ($_SERVER["REQUEST_METHOD"] == "POST") {
+<head>
+    <meta charset="utf-8">
+    <title>Comment</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+</head>
 
-                    $sentiment = $_POST['sentiment'];
-                    $desc = htmlspecialchars($_POST['description']);
-                    $blogId = $_POST['blogId'];
-                    $blogUserId = $_POST['blogUserId'];
+<body class="container my-3 ">
+    <?php
+    if (isset($_POST['addComment'])) {
 
-                    $userId = $_SESSION['sessionId'];
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-                    $currDate = date('Y-m-d');
+            $sentiment = $_POST['sentiment'];
+            $desc = htmlspecialchars($_POST['description']);
+            $blogId = $_POST['blogId'];
+            $blogUserId = $_POST['blogUserId'];
 
-                    // Check comments on current date
-                    $dayCommentsQuery = "SELECT count(*) FROM comment WHERE user_id=$userId AND date='$currDate'";
-                    $result1 = mysqli_query($db, $dayCommentsQuery);
+            $userId = $_SESSION['sessionId'];
 
-                    $dayComments = $result1->fetch_array()[0] ?? '';
+            $currDate = date('Y-m-d');
 
-                    // Check comments on current blog
-                    $blogCommentsQuery = "SELECT count(*) FROM comment WHERE user_id=$userId AND blog_id=$blogId";
-                    $result2 = mysqli_query($db, $blogCommentsQuery);
+            // Check comments on current date
+            $dayCommentsQuery = "SELECT count(*) FROM comment WHERE user_id=$userId AND date='$currDate'";
+            $result1 = mysqli_query($db, $dayCommentsQuery);
 
-                    $blogComments = $result2->fetch_array()[0] ?? '';
+            $dayComments = $result1->fetch_array()[0] ?? '';
 
-                    // at most 3 comments, 1 comment per blog, not own blog
-                    if ($dayComments < 3) {
+            // Check comments on current blog
+            $blogCommentsQuery = "SELECT count(*) FROM comment WHERE user_id=$userId AND blog_id=$blogId";
+            $result2 = mysqli_query($db, $blogCommentsQuery);
 
-                        if ($blogComments == 0) {
+            $blogComments = $result2->fetch_array()[0] ?? '';
 
-                            if ($userId != $blogUserId) {
+            // at most 3 comments, 1 comment per blog, not own blog
+            if ($dayComments < 3) {
 
-                                $sentimentBit = ($sentiment == "Positive" ? 1 : 0);
+                if ($blogComments == 0) {
 
-                                $addQuery = "INSERT INTO comment (blog_id, user_id, date, sentiment, description)
+                    if ($userId != $blogUserId) {
+
+                        $sentimentBit = ($sentiment == "Positive" ? 1 : 0);
+
+                        $addQuery = "INSERT INTO comment (blog_id, user_id, date, sentiment, description)
                                             VALUES ($blogId, $userId, '$currDate', $sentimentBit, '$desc')";
 
-                                mysqli_query($db, $addQuery);
+                        mysqli_query($db, $addQuery);
 
-                                echo "Comment added!<br><br>";
-
-                            } else {
-
-                                echo "Cannot comment on own blog.<br><br>";
-
-                            }
-
-                        } else {
-
-                            echo "Only 1 comment is allowed per blog.<br><br>";
-
-                        }
+                        echo "Comment added!<br><br>";
                     } else {
 
-                        echo "Daily comments limit reached.<br><br>";
-
+                        echo "Cannot comment on own blog.<br><br>";
                     }
+                } else {
 
+                    echo "Only 1 comment is allowed per blog.<br><br>";
                 }
-
             } else {
-            ?>
-                <?php
 
-                $blogId = "";              
-                $blogUserId = "";
-
-                // Display blog to add comment to
-                if (isset($_POST['blog_id'])) {
-
-                    $blogId = $_POST['blog_id'];
-                    $blogQuery = "SELECT * FROM blog WHERE blog_id=$blogId";
-                    $result = mysqli_query($db, $blogQuery);
-
-                    $blog = $result->fetch_array() ?? '';
-                    
-                    echo "<h5>" . $blog['subject'] . "</h5>";
-                    echo "<p>" . $blog['description'] . "</p>";
-
-                    $blogUserId = $blog['user_id'];
-
-                }
-                ?>
-                <div class="container comment">
-                    <form name="comment-form" action="" method="post">
-                        <select name="sentiment" class="form-element sentiment-option">
-                            <option value="Positive" selected>Positive</option>
-                            <option value="Negative">Negative</option>
-                        </select>
-                        <br />
-                        <textarea name="description" class="form-element description"></textarea>
-                        <br />
-                        <input id="btn" type="submit" name="addComment" class="form-element" value="Add comment"></input>
-                        <input type="hidden" name="blogId" value=<?php echo $blogId ?>></input>
-                        <input type="hidden" name="blogUserId" value=<?php echo $blogUserId ?>></input>
-                    </form>
-                </div>
-            <?php
+                echo "<h1 class='mb-2'>Daily comment limit reached.</h1";
             }
-            ?>
-            <a href="welcome.php">
-                <button id="btn">Return to Home</button>
-            </a>
+        }
+    } else {
+    ?>
+        <?php
+
+        $blogId = "";
+        $blogUserId = "";
+
+        // Display blog to add comment to
+        if (isset($_POST['blog_id'])) {
+
+            $blogId = $_POST['blog_id'];
+            $blogQuery = "SELECT * FROM blog WHERE blog_id=$blogId";
+            $result = mysqli_query($db, $blogQuery);
+
+            $blog = $result->fetch_array() ?? '';
+
+            echo "<h1 class='text-center'>" . $blog['subject'] . "</h1>";
+            echo "<p>" . $blog['description'] . "</p>";
+
+            $blogUserId = $blog['user_id'];
+        } ?>
+
+        <div>
+            <form name="comment-form" action="" method="post">
+                <div class="form-floating mb-3">
+                    <select class="form-select" id="floatingSelect" aria-label="Floating label select example" name="sentiment">
+                        <option value="Positive" selected>Positive</option>
+                        <option value="Negative">Negative</option>
+                    </select>
+                    <label for="floatingSelect">Select sentiment</label>
+                </div>
+                <div class="form-floating">
+                    <textarea class="form-control" placeholder="Comment description" id="floatingTextarea2" style="height: 100px" name="description"></textarea>
+                    <label for="floatingTextarea2">Comment description</label>
+                </div>
+                <button class=" btn btn-md btn-primary my-3" type="submit" value="Add comment" id="btn" name="addComment">Add comment</button>
+
+                <input type="hidden" name="blogId" value=<?php echo $blogId ?>></input>
+                <input type="hidden" name="blogUserId" value=<?php echo $blogUserId ?>></input>
+            </form>
         </div>
-    </body>
+    <?php
+    }
+    ?>
+    <a href="welcome.php">
+        <button class=" btn btn-md btn-secondary my-3 " type="submit">Return to Home</button>
+    </a>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+</body>
+
 </html>
