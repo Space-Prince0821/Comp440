@@ -11,7 +11,8 @@
         <h1>Query 1: Users who post at least two blogs with selected tags</h1>
         <form method="POST">
             <div class="form-floating mb-3">
-                <select class="form-select" id="floatingSelect1" aria-label="Floating label select example" name="tagForm">
+                <select class="form-select-sm" id="floatingSelect1" aria-label="Floating label select example" name="tagForm">
+                    <option selected>Select tag1</option>
                     <?php
                     include('../Config.php');
                     $query = "SELECT tag_name FROM tags";
@@ -22,14 +23,12 @@
                     }
                     ?>
                 </select>
-                <label for="floatingSelect1">Select tag1</label>
 
             </div>
-            <!-- <option value="Positive" selected>Select tag 2</option>
-                    <option value="Positive">Positive</option>
-                    <option value="Negative">Negative</option> -->
+
             <div class="form-floating mb-3">
-                <select class="form-select" id="floatingSelect2" aria-label="Floating label select example" name="tagForm2">
+                <select class="form-select-sm" id="floatingSelect2" aria-label="Floating label select example" name="tagForm2">
+                    <option selected>Select tag2</option>
                     <?php
                     include('../Config.php');
                     $query = "SELECT tag_name FROM tags";
@@ -40,13 +39,12 @@
                     }
                     ?>
                 </select>
-                <label for="floatingSelect2">Select tag2</label>
 
             </div>
             <button class=" btn btn-md btn-primary " type="submit">Search blog</button>
 
         </form>
-        <ul class="list-group">
+        <ul class="list-group mb-3">
             <?php
             include("../Config.php");
 

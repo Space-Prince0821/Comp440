@@ -11,7 +11,7 @@ include('BlogLogic.php');
 </head>
 
 <body>
-   <div class="header mt-3">
+   <header class="header mt-3">
       <nav class="navbar  navbar-expand-lg navbar-light bg-light fixed-top">
          <div class="container-fluid">
             <a class="navbar-brand">Welcome <?php echo $_SESSION['sessionUser'] ?></a>
@@ -34,11 +34,11 @@ include('BlogLogic.php');
          // echo "Home";
       }
       ?>
-   </div>
+   </header>
    <div class="container-fluid d-flex flex-wrap justify-content-center pt-5">
       <?php foreach ($query as $q) { ?>
          <div class="card m-3">
-            <div class="card-body" style="width: 18rem;">
+            <div class="card-body" style="width: 20rem;">
                <h5 class="card-title"><strong><?php echo $q['subject']; ?></strong></h5>
                <h6 class="card-subtitle mb-2 text-muted">
                   <?php
@@ -55,13 +55,13 @@ include('BlogLogic.php');
                </h6>
 
                <!-- Description -->
-               <div class="accordion mb-2" id="accordionExample">
+               <div class="accordion accordion-flush mb-2" id="accordionExample">
                   <div class="accordion-item">
                      <h2 class="accordion-header" id="headingOne">
-                        <button class=" btn btn-outline-primary accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="  <?php
-                                                                                                                                             $blogID = $q['blog_id'];
-                                                                                                                                             echo '#collapse' . $blogID;
-                                                                                                                                             ?>" aria-expanded="true" aria-controls="<?php
+                        <button class=" btn btn-outline-primary accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="  <?php
+                                                                                                                                                      $blogID = $q['blog_id'];
+                                                                                                                                                      echo '#collapse' . $blogID;
+                                                                                                                                                      ?>" aria-expanded="true" aria-controls="<?php
                                                                                                                                                                                        $blogID = $q['blog_id'];
                                                                                                                                                                                        echo 'collapse' . $blogID;
                                                                                                                                                                                        ?>">
@@ -78,16 +78,17 @@ include('BlogLogic.php');
                      </div>
                   </div>
                </div>
+
                <!-- Comments -->
                <div class="comments">
 
-                  <div class="accordion" id="accordionExample">
+                  <div class="accordion accordion-flush" id="accordionExample">
                      <div class="accordion-item">
                         <h2 class="accordion-header" id="headingOne">
-                           <button class=" btn btn-outline-secondary accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="  <?php
-                                                                                                                                                   $blogID = $q['blog_id'];
-                                                                                                                                                   echo '#collapseComment' . $blogID;
-                                                                                                                                                   ?>" aria-expanded="true" aria-controls="<?php
+                           <button class=" btn btn-outline-secondary accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="  <?php
+                                                                                                                                                            $blogID = $q['blog_id'];
+                                                                                                                                                            echo '#collapseComment' . $blogID;
+                                                                                                                                                            ?>" aria-expanded="true" aria-controls="<?php
                                                                                                                                                                                              $blogID = $q['blog_id'];
                                                                                                                                                                                              echo 'collapseComment' . $blogID;
                                                                                                                                                                                              ?>">
@@ -120,8 +121,8 @@ include('BlogLogic.php');
                                  echo '<div class="d-flex">';
                                  echo '<h6 class="my-1">' . $username . '&nbsp;</h6>';
                                  echo $sentiment == 'Negative' ? ' <i class="bi bi-emoji-frown text-danger my-1">  </i>' : '<i class="bi bi-emoji-smile text-success my-1">  </i>';
-                                 echo '<p >&nbsp;' . $description . '</p>';
                                  echo '</div>';
+                                 echo '<p>' . $description . '</p>';
                               }
                               ?>
                            </div>

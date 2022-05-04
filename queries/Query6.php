@@ -2,7 +2,6 @@
 
 <head>
     <meta charset="utf-8">
-    <meta charset="utf-8">
     <title>Query 6</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 </head>
@@ -10,6 +9,7 @@
 <body>
     <div class="container mt-3">
         <h1>Query 6: Users with no blogs posted</h1>
+        <ul class="list-group">
         <?php
         include("../Config.php");
         $numHobbies = 7;
@@ -24,6 +24,7 @@
         }
 
         ?>
+        </ul>
         <a href="../welcome.php">
             <button class=" btn btn-md btn-primary mt-3" type="submit">Return to Home</button>
         </a>

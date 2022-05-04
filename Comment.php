@@ -91,10 +91,10 @@ include('Config.php');
             <form name="comment-form" action="" method="post">
                 <div class="form-floating mb-3">
                     <select class="form-select" id="floatingSelect" aria-label="Floating label select example" name="sentiment">
-                        <option value="Positive" selected>Positive</option>
+                        <option  selected>Select sentiment value</option>
+                        <option value="Positive" >Positive</option>
                         <option value="Negative">Negative</option>
                     </select>
-                    <label for="floatingSelect">Select sentiment</label>
                 </div>
                 <div class="form-floating">
                     <textarea class="form-control" placeholder="Comment description" id="floatingTextarea2" style="height: 100px" name="description"></textarea>

@@ -52,11 +52,11 @@
 
                     foreach ($sqlStmtQuery2 as $g2) { ?>
                         <div class="card m-3">
-                            <div class="card-body" style="width: 18rem;">
+                            <div class="card-body" style="width: 20rem;">
                                 <h5 class="card-title"><strong><?php echo $g2['subject']; ?></strong></h5>
                                 <h6 class="card-subtitle mb-2 text-muted">
                                     <?php
-                                    //Get username of commenter
+                                    //Get username of commenter`
                                     $userId = $g2['user_id'];
                                     $usernameQuery = "SELECT username FROM users WHERE user_id=$userId";
                                     $result = mysqli_query($db, $usernameQuery);
@@ -69,10 +69,10 @@
                                 </h6>
 
                                 <!-- Description -->
-                                <div class="accordion mb-2" id="accordionExample">
+                                <div class="accordion accordion-flush mb-2" id="accordionExample">
                                     <div class="accordion-item">
                                         <h2 class="accordion-header" id="headingOne">
-                                            <button class=" btn btn-outline-primary accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="  <?php
+                                            <button class=" btn btn-outline-primary accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="  <?php
                                                                                                                                                                 $blogID = $g2['blog_id'];
                                                                                                                                                                 echo '#collapse' . $blogID;
                                                                                                                                                                 ?>" aria-expanded="true" aria-controls="<?php
@@ -95,10 +95,10 @@
                                 <!-- Comments -->
                                 <div class="comments">
 
-                                    <div class="accordion" id="accordionExample">
+                                    <div class="accordion accordion-flush" id="accordionExample">
                                         <div class="accordion-item">
                                             <h2 class="accordion-header" id="headingOne">
-                                                <button class=" btn btn-outline-secondary accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="  <?php
+                                                <button class=" btn btn-outline-secondary accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="  <?php
 
                                                                                                                                                                         echo '#collapseComment' . $blogID;
                                                                                                                                                                         ?>" aria-expanded="true" aria-controls="<?php

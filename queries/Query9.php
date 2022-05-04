@@ -7,8 +7,9 @@
 </head>
 
 <body>
-    <div class="container mt-3">
-        <h1>Display those users such that all the blogs they posted so far never received any negative comments.</h1>
+    <ul class="container mt-3">
+        <h1>Display the users such that all the blogs they posted so far never received any negative comments.</h1>
+        <ul class="list-group">
         <?php
 
         include "../Config.php";
@@ -39,6 +40,7 @@
         }
 
         ?>
+    </ul>
         <a href="../welcome.php">
             <button class=" btn btn-md btn-primary mt-3" type="submit">Return to Home</button>
         </a>
