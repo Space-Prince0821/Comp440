@@ -40,4 +40,4 @@ Queries 8 and 9
 Queries 1, 2, 3 and 7
 
 ### PHASE 3 Turorial Video URL on Youtube:
-
+https://youtu.be/eLaOd6AU5Jc
