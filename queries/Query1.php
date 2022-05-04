@@ -43,7 +43,7 @@
                 <label for="floatingSelect2">Select tag2</label>
 
             </div>
-            <button class=" btn btn-md btn-primary mt-3" type="submit">Search blog</button>
+            <button class=" btn btn-md btn-primary " type="submit">Search blog</button>
 
         </form>
         <ul class="list-group">
@@ -101,7 +101,7 @@
             ?>
         </ul>
         <a href="../welcome.php">
-            <button class=" btn btn-md btn-primary mt-3" type="submit">Return to Home</button>
+            <button class=" btn btn-md btn-secondary " type="submit">Return to Home</button>
         </a>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
